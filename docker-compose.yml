@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  test_main_db:
+    image: mariadb:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: testMainDatabase
+      MYSQL_USER: testUser
+      MYSQL_PASSWORD: testPassword
+    ports:
+      - "3306:3306"
+    networks:
+      - test_db_network
+
+networks:
+  test_db_network:
+    driver: bridge

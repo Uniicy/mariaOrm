@@ -1,0 +1,56 @@
+{
+  "name": "mariaOrm",
+  "version": "1.0.0",
+  "description": "A TypeScript-based ORM using the MariaDB npm package",
+  "main": "dist/index.js",
+  "types": "dist/types/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "prepublishOnly": "npm run build",
+    "test": "jest --coverage --detectOpenHandles",
+    "test:docker:up": "docker-compose up -d",
+    "test:docker:down": "docker-compose down",
+    "prepare": "husky install"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/mariaOrm.git"
+  },
+  "keywords": ["typescript", "orm", "mariadb", "database"],
+  "author": "Your Name",
+  "license": "MIT",
+  "dependencies": {
+    "mariadb": "^2.5.3"
+  },
+  "devDependencies": {
+    "typescript": "^4.3.5",
+    "@types/node": "^14.14.37",
+    "jest": "^27.0.6",
+    "ts-jest": "^27.0.3",
+    "@types/jest": "^27.0.1",
+    "husky": "^7.0.2",
+    "lint-staged": "^11.0.0",
+    "prettier": "^2.3.2",
+    "eslint": "^7.32.0",
+    "@typescript-eslint/parser": "^4.29.3",
+    "@typescript-eslint/eslint-plugin": "^4.29.3",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^3.4.0",
+    "typedoc": "^0.21.2",
+    "node-cache": "^5.1.2",
+    "sinon": "^11.1.1"
+  },
+  "lint-staged": {
+    "*.ts": [
+      "prettier --write",
+      "tsc --noEmit",
+      "eslint --fix"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "pre-push": "npm run test:docker:up && npm test && npm run test:docker:down"
+    }
+  }
+}
